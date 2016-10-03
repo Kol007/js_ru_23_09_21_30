@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from './decorators/toggleOpen'
 
@@ -16,6 +16,10 @@ function CommentList(props) {
             {body}
         </div>
     )
+}
+
+CommentList.PropTypes = {
+    comments: PropTypes.array
 }
 
 export default toggleOpen(CommentList)

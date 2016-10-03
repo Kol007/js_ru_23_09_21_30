@@ -1,21 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 
 export default class Article extends Component {
-    static defaultProps = {
-
-    }
-    componentWillMount() {
-        console.log('---', 'mounting')
-    }
-
-    componentDidMount() {
-        console.log('---', 'mounted')
+    static propTypes = {
+      article: PropTypes.shape({
+        id:     PropTypes.string.isRequired,
+        title:  PropTypes.string.isRequired,
+        text:   PropTypes.string,
+        date:   PropTypes.string
+      }).isRequired
     }
 
-    componentWillUnmount() {
-        console.log('---', 'unmounting')
-    }
+    // componentWillMount() {
+    //     console.log('---', 'mounting')
+    // }
+    //
+    // componentDidMount() {
+    //     console.log('---', 'mounted')
+    // }
+    //
+    // componentWillUnmount() {
+    //     console.log('---', 'unmounting')
+    // }
 
     constructor(props) {
         super()
