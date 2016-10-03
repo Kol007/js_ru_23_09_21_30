@@ -4,12 +4,12 @@ export default function accordion(Component) {
   return class WrapperComponent extends React.Component {
     state = {
       //не привязывайся к названию сущности, в декораторах должен быть общий функционал. Используй, например, openItemId 
-      openArticleId: null
+      openItemId: null
     }
 
     toggleArticle = id => ev => {
       this.setState({
-        openArticleId: id !== this.state.openArticleId ? id : null
+        openItemId: id !== this.state.openItemId ? id : null
       })
     }
 
