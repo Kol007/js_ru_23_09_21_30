@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 import toggleOpen from './decorators/toggleOpen'
 
-
 const Article = (props) => {
   const { article, isOpen, openArticle } = props
   const body = isOpen ? <section>{article.text}<CommentList comments = {article.comments} /></section> : null

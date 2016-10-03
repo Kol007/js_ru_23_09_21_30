@@ -3,73 +3,44 @@ import Highcharts  from 'highcharts';
 import toggleOpen from './decorators/toggleOpen'
 
 let data = {
-    title: {
-        text: 'Monthly Average Temperature',
-        x: -20 //center
+    chart: {type: 'column'},
+    title: {text: 'Количество комментариев по постам'},
+    xAxis: {type: 'category'},
+    legend: {enabled: false},
+    plotOptions: {
+        series: {
+            borderWidth: 0,
+            dataLabels: {enabled: true, format: '{point.y:.1f}'}
+        }
     },
-    subtitle: {
-        text: 'Source: WorldClimate.com',
-        x: -20
-    },
-    xAxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    },
-    yAxis: {
-        title: {
-            text: 'Temperature (°C)'
-        },
-        plotLines: [{
-            value: 0,
-            width: 1,
-            color: '#808080'
-        }]
-    },
-    tooltip: {
-        valueSuffix: '°C'
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle',
-        borderWidth: 0
-    },
-    series: [{
-        name: 'Tokyo',
-        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-    }, {
-        name: 'New York',
-        data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-    }, {
-        name: 'Berlin',
-        data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-    }, {
-        name: 'London',
-        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-    }]
 }
 
 class Chart extends Component {
     static propTypes = {
-
+        articles: PropTypes.array
     };
 
     componentDidMount() {
-        if (this.props.isOpen) {
-            Highcharts.chart(this.refs.chartContainer, data);
-        }
-    }
-
-    getInnerRef = (ref) => {
-        this.innerContainer = ref
+        Highcharts.chart(this.refs.chartContainer, data);
     }
 
     render() {
-        const { isOpen, toggleOpen } = this.props
-        // console.log(toggleOpen)
-        return <div onClick={toggleOpen}>
-                Open Chart
-                <div ref = "chartContainer"/>
+        const { articles, isOpen, toggleOpen } = this.props
+        const classHidden = isOpen ? '' : 'hidden';
+
+        let seriesData = articles.map(item => { return {name: item.title, y: item.comments ? item.comments.length : 0} } )
+
+        const chartSeries = [{
+            name: 'Посты',
+            colorByPoint: true,
+            data: seriesData
+        }]
+
+        data.series = chartSeries
+
+        return <div >
+                <button onClick={toggleOpen}>Toggle Chart</button>
+                <div ref = "chartContainer" className={classHidden}/>
             </div>
     }
 }

@@ -19,7 +19,7 @@ const ArticleList = (props) => {
           <ul>
               {articleComponents}
           </ul>
-          <Chart />
+          <Chart articles = {articles} />
       </div>
     )
 };
