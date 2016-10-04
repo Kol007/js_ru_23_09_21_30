@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { findDOMNode } from 'react-dom'
 import CommentList from './CommentList'
 
 export default class Article extends Component {
@@ -8,10 +9,37 @@ export default class Article extends Component {
         openArticle: PropTypes.func.isRequired
     }
 
+    componentDidMount() {
+        console.log('---', 'mounting')
+    }
+
+    componentWillUnmount() {
+        console.log('---', 'unmounting')
+    }
+
+    componentDidUpdate() {
+        console.log('---', 'updating')
+    }
+
+    handleRef(ref) {
+        console.log('---', findDOMNode(ref))
+    }
+/*
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return (this.props.isOpen != nextProps.isOpen)
+    }
+*/
+
     render() {
         const { article, isOpen, openArticle } = this.props
 
-        const body = isOpen ? <section>{article.text}<CommentList comments = {article.comments}/></section> : null
+        const body = isOpen ? (
+            <section>
+                {article.text}
+                <CommentList ref = {this.handleRef} comments = {article.comments}/>
+            </section>
+        ) : null
 
         return (
             <div>
