@@ -15,7 +15,7 @@ class Container extends Component {
             <div>
                 <Filters articles = {articles}/>
                 <ArticleList articles = {articles} />
-                <Chart />
+                <Chart articles = {articles} />
                 <NewArticleForm />
             </div>
         )

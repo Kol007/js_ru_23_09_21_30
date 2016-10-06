@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import Comment from './Comment'
+import CommentListForm from './CommentListForm'
 import toggleOpen from './../decorators/toggleOpen'
 
 function CommentList(props) {
@@ -13,6 +14,7 @@ function CommentList(props) {
     return (
         <div>
             <a href="#" onClick={toggleOpen}>{text}</a>
+            <CommentListForm/>
             {body}
         </div>
     )

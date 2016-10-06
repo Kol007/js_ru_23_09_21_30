@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
+import RangePicker from './RangePicker'
+
 
 class Filters extends Component {
     static propTypes = {
@@ -27,6 +29,8 @@ class Filters extends Component {
                     onChange = {this.handleChange}
                     multi={true}
                 />
+                <RangePicker />
+
             </div>
         )
     }

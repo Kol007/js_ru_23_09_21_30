@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Highcharts  from 'highcharts';
-import toggleOpen from './decorators/toggleOpen'
+import toggleOpen from '../decorators/toggleOpen'
 
 let data = {
     chart: {type: 'column'},
