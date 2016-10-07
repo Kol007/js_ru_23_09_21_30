@@ -5,7 +5,7 @@ class CommentListForm extends Component {
 
   submitNewComment = ev => {
     ev.preventDefault()
-
+    //нет, мы же на уроке говорили, что лучше использовать state
     let author = ev.target.elements.author;
     let comment = ev.target.elements.comment;
 
