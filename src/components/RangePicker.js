@@ -53,7 +53,7 @@ class RangePicker extends Component {
 
   }
 }
-
+//лучше определись и используй один синтаксис. это и static defaultProps = {} одно и тоже будет
 RangePicker.defaultProps = {};
 
 export default RangePicker;
