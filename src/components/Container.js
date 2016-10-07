@@ -11,13 +11,12 @@ class Container extends Component {
     };
 
     render() {
-        const { articles } = this.props
         return (
             <div>
                 <Counter />
-                <Filters articles = {articles}/>
-                <ArticleList articles = {articles} />
-                <Chart articles = {articles} />
+                <Filters articles = {[]}/>
+                <ArticleList articles = {[]} />
+                <Chart />
                 <NewArticleForm />
             </div>
         )
