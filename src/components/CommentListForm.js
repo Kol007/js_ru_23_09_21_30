@@ -3,14 +3,25 @@ import React, {Component, PropTypes} from 'react';
 class CommentListForm extends Component {
   static propTypes = {};
 
+  state = {
+    author: '',
+    comment: ''
+  }
+
+  componentDidUpdate(prevProps, prevState, prevContext) {
+    console.info(`${this.state.author}: ${this.state.comment}`);
+  }
+
+
   submitNewComment = ev => {
     ev.preventDefault()
     //нет, мы же на уроке говорили, что лучше использовать state
-    let author = ev.target.elements.author;
-    let comment = ev.target.elements.comment;
+    this.setState({
+      author: ev.target.elements.author.value,
+      comment: ev.target.elements.comment.value
+    })
 
-    console.info(`${author.value}: ${comment.value}`);
-    author.value = comment.value = ''
+    ev.target.elements.author.value = ev.target.elements.comment.value = ''
   }
 
   render() {

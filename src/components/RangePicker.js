@@ -2,10 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import DayPicker, { DateUtils } from 'react-day-picker'
 import 'react-day-picker/lib/style.css'
 
-function sunday(day) {
-  return day.getDay() === 0;
-}
-
 class RangePicker extends Component {
   static propTypes = {};
 
@@ -53,7 +49,5 @@ class RangePicker extends Component {
 
   }
 }
-//лучше определись и используй один синтаксис. это и static defaultProps = {} одно и тоже будет
-RangePicker.defaultProps = {};
 
 export default RangePicker;
