@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 class ArticleList extends Component {
     static propTypes = {
+        //from store
         articles: PropTypes.array.isRequired,
         //from accordion decorator
         toggleItem: PropTypes.func.isRequired,
@@ -28,5 +29,26 @@ class ArticleList extends Component {
 }
 
 export default connect(state => ({
-    articles: state.articles
+    articles: helperFilter(state)
 }))(accordion(ArticleList))
+
+
+// Helpers
+
+function helperFilter (state){
+    var { articles, filters } = state
+
+    if (filters.selected && filters.selected.value) {
+        articles = articles.filter((article) => article.id == filters.selected.value)
+    }
+
+    if (filters.from) {
+        articles = articles.filter((article) => +(new Date(article.date) > +filters.from))
+    }
+
+    if (filters.to) {
+        articles = articles.filter((article) => +(new Date(article.date) < +filters.to))
+    }
+
+    return articles
+}

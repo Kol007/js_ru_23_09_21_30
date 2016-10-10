@@ -28,12 +28,6 @@ class Article extends Component {
     handleRef(ref) {
         console.log('---', findDOMNode(ref))
     }
-/*
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return (this.props.isOpen != nextProps.isOpen)
-    }
-*/
 
     render() {
         const { article, isOpen, openArticle } = this.props
@@ -48,7 +42,11 @@ class Article extends Component {
         return (
             <div>
                 <h3 onClick = {openArticle}>{article.title}</h3>
-                <a href ="#" onClick = {this.handleDelete}>delete me</a>
+                <small>
+                    {article.date}{`  `}
+                    <a href ="#" onClick = {this.handleDelete}>delete me</a>
+                </small>
+
                 <CSSTransition
                     transitionName="article"
                     transitionEnterTimeout={500}

@@ -1,22 +1,32 @@
 import React, { Component, PropTypes } from 'react'
-
 import DatePicker from './DatePicker'
 import SelectFilter from './SelectFilter'
-import RangePicker from './RangePicker'
+import { connect } from 'react-redux'
 
 class Filter extends Component {
-    static propTypes = {
-        articles: PropTypes.array.isRequired
-    };
+  static propTypes = {
+    articles: PropTypes.array.isRequired
+  };
 
-    render() {
-        return (
-            <div>
-                <RangePicker />
-                <SelectFilter articles = {this.props.articles} />
-            </div>
-        )
-    }
+  handleStoreChange = () => {
+    this.setState({
+      articles: store.getState(),
+      filters: store.getState()
+    })
+  }
+
+  render() {
+    const { articles } = this.props
+
+    return (
+      <div>
+        <DatePicker />
+        <SelectFilter articles = {this.props.articles} />
+      </div>
+    )
+  }
 }
 
-export default Filter
+export default connect(state => ({
+  articles: state.articles
+}))(Filter)

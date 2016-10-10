@@ -1,6 +1,5 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
-import CommentListForm from './CommentListForm'
 import toggleOpen from './../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
 
@@ -13,14 +12,12 @@ function CommentList(props) {
     const body = isOpen && <div><ul>{commentItems}</ul><NewCommentForm /></div>
 
     return (
-        <div>
-            <a href="#" onClick={toggleOpen}>{text}</a>
-            <CommentListForm/>
-            {body}
-        </div>
+      <div>
+          <a href="#" onClick={toggleOpen}>{text}</a>
+          {body}
+      </div>
     )
 }
-
 
 CommentList.propTypes = {
     comments: PropTypes.array,
