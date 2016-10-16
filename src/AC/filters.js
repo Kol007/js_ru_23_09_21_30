@@ -7,9 +7,9 @@ export function filterSelect(selected) {
   }
 }
 
-export function filterDaterange(range) {
+export function filterDaterange(dateRange) {
   return {
     type: FILTER_DATERANGE,
-    payload: { range }
+    payload: { dateRange }
   }
 }

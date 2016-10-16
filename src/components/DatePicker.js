@@ -29,7 +29,6 @@ class DatePicker extends Component {
 
 }
 
-export default connect(state => ({
-    from: state.filters.from,
-    to: state.filters.to
-}), { filterDaterange })(DatePicker)
+export default connect(state => {console.log('---', state);return ({from: state.filters.dateRange.from,
+    to: state.filters.dateRange.to
+})}, { filterDaterange })(DatePicker)

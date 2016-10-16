@@ -36,19 +36,15 @@ export default connect(state => ({
 // Helpers
 
 function helperFilter (state){
-    var { articles, filters } = state
+    const { articles, filters } = state
+    const articleList = Object.keys(articles).map(id => articles[id])
+    const selected  = filters.selected
+    const { from, to } = filters.dateRange
 
-    if (filters.selected && filters.selected.value) {
-        articles = articles.filter((article) => article.id == filters.selected.value)
-    }
-
-    if (filters.from) {
-        articles = articles.filter((article) => +(new Date(article.date) > +filters.from))
-    }
-
-    if (filters.to) {
-        articles = articles.filter((article) => +(new Date(article.date) < +filters.to))
-    }
-
-    return articles
+    return articleList.filter(article => {
+        const published = Date.parse(article.date)
+        console.log('--f-', selected, article.id, selected.includes(article.id));
+        return (!selected.length || selected.includes(article.id)) &&
+          (!from || !to || (published > from && published < to))
+    })
 }
