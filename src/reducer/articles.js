@@ -1,12 +1,15 @@
-import { DELETE_ARTICLE, FILTER_SELECT, FILTER_DATERANGE } from '../constants'
-import { articles as defaultArticles } from '../fixtures'
+import { DELETE_ARTICLE } from '../constants'
+import { normalizedArticles } from '../fixtures'
+import { arrayToMap } from '../store/helpers'
 
-export default (articles = defaultArticles, action) => {
-    const { type, payload } = action
+export default (articles = arrayToMap(normalizedArticles), action) => {
+  const { type, payload } = action
 
-    switch (type) {
-        case DELETE_ARTICLE:
-            return articles.filter(article => article.id != payload.id)
-    }
-    return articles
+  switch (type) {
+    case DELETE_ARTICLE:
+      return Object.keys(articles)
+        .filter(id => id != payload.id)
+        .reduce((acc, id) => ({...acc, [id]: articles[id]}), {})
+  }
+  return articles
 }

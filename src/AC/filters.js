@@ -1,15 +1,15 @@
-import { FILTER_SELECT, FILTER_DATERANGE } from '../constants'
+import { CHANGE_DATE_RANGE, CHANGE_SELECTION } from '../constants'
 
-export function filterSelect(selected) {
+export function changeDateRange(dateRange) {
   return {
-    type: FILTER_SELECT,
-    payload: { selected }
+    type: CHANGE_DATE_RANGE,
+    payload: { dateRange }
   }
 }
 
-export function filterDaterange(dateRange) {
+export function changeSelection(selected) {
   return {
-    type: FILTER_DATERANGE,
-    payload: { dateRange }
+    type: CHANGE_SELECTION,
+    payload: { selected }
   }
 }
