@@ -15,19 +15,19 @@ class Article extends Component {
     }
 
     componentDidMount() {
-        console.log('---', 'mounting')
+        // console.log('---', 'mounting')
     }
 
     componentWillUnmount() {
-        console.log('---', 'unmounting')
+        // console.log('---', 'unmounting')
     }
 
     componentDidUpdate() {
-        console.log('---', 'updating')
+        // console.log('---', 'updating')
     }
 
     handleRef(ref) {
-        console.log('---', findDOMNode(ref))
+        // console.log('---', findDOMNode(ref))
     }
 
     render() {
@@ -36,7 +36,7 @@ class Article extends Component {
         const body = isOpen ? (
             <section>
                 {article.text}
-                <CommentList ref = {this.handleRef} comments = {comments}/>
+                <CommentList ref = {this.handleRef} comments = {comments} articleId = {article.id} />
             </section>
         ) : null
 

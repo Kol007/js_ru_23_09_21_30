@@ -1,12 +1,7 @@
 import ADD_COMMENT from '../constants'
 
 export default store => next => action => {
-  if (action.type == ADD_COMMENT) {
-    const newAction = Object.assign({}, action, {payload: { generatedID: generateUUID() } })
-    next(newAction)
-    return
-  }
-
+  action.payload.generateId = generateUUID()
   next(action)
 }
 
@@ -18,3 +13,4 @@ function generateUUID() {
     return (c=='x' ? r : (r&0x3|0x8)).toString(16)
   })
 }
+

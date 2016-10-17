@@ -9,13 +9,12 @@ class CommentListForm extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, prevContext) {
-    console.info(`${this.state.author}: ${this.state.comment}`);
+    // console.info(`${this.state.author}: ${this.state.comment}`);
   }
 
 
   submitNewComment = ev => {
     ev.preventDefault()
-    //нет, мы же на уроке говорили, что лучше использовать state
     this.setState({
       author: ev.target.elements.author.value,
       comment: ev.target.elements.comment.value
