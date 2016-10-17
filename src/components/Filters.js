@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 class Filter extends Component {
   static propTypes = {
-    articles: PropTypes.array.isRequired
+    articles: PropTypes.object.isRequired
   };
 
   handleStoreChange = () => {

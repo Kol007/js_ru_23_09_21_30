@@ -6,3 +6,7 @@ export function getRelation(entity, relation, storeState) {
 export function arrayToMap(arr) {
     return arr.reduce((acc, entity) => ({...acc, [entity.id]: entity}), {})
 }
+
+export function arrayToMapNew(arr, Record) {
+    return arr.reduce((acc, entity) => ({...acc, [entity.id]: Record(entity)}), {})
+}
