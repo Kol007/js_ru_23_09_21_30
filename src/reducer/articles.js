@@ -14,9 +14,6 @@ const ArticlesRecord = Record({
 export default (articles = arrayToMapNew(normalizedArticles, ArticlesRecord), action) => {
   const { type, payload } = action
 
-  // console.log('---', normalizedArticles, articles);
-
-
   switch (type) {
     case DELETE_ARTICLE:
       return Object.keys(articles)
