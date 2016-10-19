@@ -2,70 +2,49 @@ import React, { Component, PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
 import CommentList from './CommentList'
 import CSSTransition from 'react-addons-css-transition-group'
-import './animate.css'
-import { deleteArticle } from '../AC/articles'
+import Loader from './Loader'
+import './animation.css'
+import { deleteArticle, loadArticle } from '../AC/articles'
 import { connect } from 'react-redux'
-import { getRelation } from '../store/helpers'
 
 class Article extends Component {
-    static propTypes = {
-        article: PropTypes.object.isRequired,
-        isOpen: PropTypes.bool.isRequired,
-        openArticle: PropTypes.func.isRequired
-    }
+  static propTypes = {
+    article: PropTypes.object.isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    openArticle: PropTypes.func.isRequired
+  }
 
-    componentDidMount() {
-        // console.log('---', 'mounting')
-    }
+  componentWillReceiveProps(nextProps) {
+    const { isOpen, loadArticle, article: { id, text, loading } } = this.props
+    if (nextProps.isOpen && !isOpen && !text && !loading) loadArticle(id)
+  }
 
-    componentWillUnmount() {
-        // console.log('---', 'unmounting')
-    }
+  render() {
+    const { article, isOpen, openArticle } = this.props
 
-    componentDidUpdate() {
-        // console.log('---', 'updating')
-    }
+    const loader = article.loading ? <Loader /> : null
+    const body = isOpen ? <section>{loader}{article.text}<CommentList article = {article} ref = "commentList"/></section> : null
 
-    handleRef(ref) {
-        // console.log('---', findDOMNode(ref))
-    }
+    return (
+      <div>
+        <h3 onClick = {openArticle}>{article.title}</h3>
+        <a href = "#" onClick = {this.handleDelete}>delete me</a>
+        <CSSTransition
+          transitionName="article"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}
+        >
+          {body}
+        </CSSTransition>
+      </div>
+    )
+  }
 
-    render() {
-        const { article, comments, isOpen, openArticle } = this.props
-
-        const body = isOpen ? (
-            <section>
-                {article.text}
-                <CommentList ref = {this.handleRef} comments = {comments} articleId = {article.id} />
-            </section>
-        ) : null
-
-        return (
-            <div>
-                <h3 onClick = {openArticle}>{article.title}</h3>
-                <small>
-                    {article.date}{`  `}
-                    <a href ="#" onClick = {this.handleDelete}>delete me</a>
-                </small>
-
-                <CSSTransition
-                    transitionName="article"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={300}
-                >
-                    {body}
-                </CSSTransition>
-            </div>
-        )
-    }
-
-    handleDelete = ev => {
-        ev.preventDefault()
-        const { article, deleteArticle } = this.props
-        deleteArticle(article.id)
-    }
+  handleDelete = (ev) => {
+    ev.preventDefault()
+    const { article, deleteArticle } = this.props
+    deleteArticle(article.id)
+  }
 }
 
-export default connect((state, props) => ({
-    comments: getRelation(props.article, 'comments', state)
-}), { deleteArticle })(Article)
+export default connect(null, { deleteArticle, loadArticle })(Article)
