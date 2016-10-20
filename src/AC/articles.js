@@ -1,5 +1,4 @@
 import { DELETE_ARTICLE, LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL } from '../constants'
-import $ from 'jquery'
 
 export function deleteArticle(id) {
     return {
@@ -23,12 +22,16 @@ export function loadArticle(id) {
         })
 
         setTimeout(() => {
-            $.get(`/api/article/${id}`)
-                .done(response => dispatch({
+            fetch(`/api/article/${id}`)
+              .then((response) => response.json())
+              .then((response) => dispatch({
                     type: LOAD_ARTICLE + SUCCESS,
                     payload: { id },
                     response
-                }))
+              }))
+              .catch((error) => {
+                  console.log('---', error);
+              })
         }, 1000)
     }
 }

@@ -6,7 +6,7 @@ class Chart extends Component {
     };
 
     componentDidMount() {
-        console.log('---', this.refs.container)
+        // console.log('---', this.refs.container)
     }
 
     getInnerRef = (ref) => {
