@@ -33,7 +33,6 @@ export default (articles = defaultState, action) => {
       return articles.set('loading', true)
 
     case LOAD_ALL_ARTICLES + SUCCESS:
-      console.log('--red SUcce-', );
       return articles
         .set('entities', arrayToMap(response, article => new ArticleModel(article)))
         .set('loading', false)
