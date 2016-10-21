@@ -23,6 +23,7 @@ export default (comments = defaultState, action) => {
     case ADD_COMMENT:
       return comments.setIn(['entities', generatedId], new CommentModel({...payload.comment, id: generatedId}))
 
+    //Здесь плохо подходит такое обозначение, поскольку ты загружаешь не все комменты. Стоит хранить для какой статьи идет загрузка
     case LOAD_COMMENTS + START:
       return comments.set('loading', true)
 
