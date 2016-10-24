@@ -14,8 +14,8 @@ class CommentPagination extends Component {
   };
 
   componentDidMount(nextProps, nextContext) {
-    const { loadPaginationComments, loadedPages, page = 1 } = this.props
-    if (!~loadedPages.indexOf(page)) loadPaginationComments(page)
+    const { loadPaginationComments, loadedPages, loading, page } = this.props
+    if (!~loadedPages.indexOf(page)  && !loading) loadPaginationComments(page)
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
