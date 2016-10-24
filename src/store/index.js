@@ -9,7 +9,7 @@ import createLogger  from 'redux-logger'
 const logger = createLogger();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const enhancer = composeEnhancers(applyMiddleware(thunk, api, randomId, logger))
+const enhancer = composeEnhancers(applyMiddleware(thunk, api, randomId/*, logger*/))
 
 const store = createStore(reducer, {}, enhancer)
 

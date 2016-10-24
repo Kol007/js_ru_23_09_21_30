@@ -2,6 +2,8 @@ import React from 'react'
 import { Router, Route, hashHistory, browserHistory } from 'react-router'
 import Container from './components/Container'
 import ArticleList from './routeHandlers/ArticleListPage'
+import CommentPagination from './routeHandlers/CommentPaginationPage'
+
 import NewArticleForm from './components/NewArticleForm'
 import Filters from './components/Filters'
 import Counter from './components/Counter'
@@ -14,6 +16,7 @@ export default <Router history = {browserHistory}>
             <Route path = "new" component = {NewArticleForm} />
             <Route path = ":id" component = {ArticlePage}/>
         </Route>
+        <Route path = "comment(/:page)" component = {CommentPagination} />
         <Route path = "filters" component = {Filters} />
         <Route path = "counter" component = {Counter} />
         <Route path = "*" component = {NotFoundPage} />

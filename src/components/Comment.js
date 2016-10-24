@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 
 function Comment(props) {
-    const { text, user } = props.comment
+    const { text, user, id } = props.comment
     return (
         <p>
-            {text} <strong>by {user}</strong>
+            {text} <strong>by {user} [{id}]</strong>
         </p>
     )
 }
