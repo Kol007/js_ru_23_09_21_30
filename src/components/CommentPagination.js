@@ -30,6 +30,7 @@ class CommentPagination extends Component {
     if (loading) return <Loader/>
 
     // limit лучше брать из конфиг стора думаю...
+    // да, но сейчас это не требуется
     const limit = 5
 
     let pager = [];
@@ -65,6 +66,7 @@ class CommentPagination extends Component {
 
 export default connect((state, props) => {
   return ({
+    //это уже не relation
     comments: getRelationMy(state.comments, 'comments', state, ['pages', props.page || 1]),
 
     pages: state.comments.get('pages'),
@@ -73,5 +75,6 @@ export default connect((state, props) => {
     loading: state.comments.get('loading'),
 
     // Здесь может както лучше задать дефолт..
+    // в коннекте - нет, в компоненте ты можешь просто defaultProps завести, но я б сказал, что это вообще лишнее
     page: props.page || 1
 })}, { loadPaginationComments })(CommentPagination)
