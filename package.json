@@ -7,7 +7,9 @@
     "start": "concurrently \"npm run dev\" \"npm run api\"",
     "api": "node simple_api/server.js",
     "dev": "webpack-dev-server --hot --inline",
-    "build": "webpack"
+    "build": "webpack",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -48,6 +50,8 @@
     "react-select": "^1.0.0-rc.2",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.0",
-    "redux-thunk": "^2.1.0"
-  }
+    "redux-thunk": "^2.1.0",
+    "snyk": "^1.316.2"
+  },
+  "snyk": true
 }
